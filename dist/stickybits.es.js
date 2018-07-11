@@ -77,7 +77,8 @@ function () {
       stickyChangeClass: o.stickyChangeClass || 'js-is-sticky--change',
       useStickyClasses: o.useStickyClasses || false,
       useFixed: o.useFixed || false,
-      verticalPosition: o.verticalPosition || 'top'
+      verticalPosition: o.verticalPosition || 'top',
+      offsetMargin: o.offsetMargin || 0
     };
     var p = this.props;
     /*
@@ -227,6 +228,14 @@ function () {
     do {
       offsetTop = el.offsetTop + offsetTop;
     } while (el = el.offsetParent);
+
+    if (typeof this.props.offsetMargin == "function") {
+      offsetTop = this.props.offsetMargin(offsetTop);
+    }
+
+    if (this.props.offsetMargin) {
+      offsetTop += this.props.offsetMargin;
+    }
 
     return offsetTop;
   };
