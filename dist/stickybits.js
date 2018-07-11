@@ -346,6 +346,7 @@
         it.state = 'sticky';
         rAF(function () {
           tC(e, stuck, sticky);
+          tC(e.parentNode, stuck, sticky);
           stl.position = pv;
           if (ns) return;
           stl.bottom = '';
@@ -355,12 +356,14 @@
         it.state = 'default';
         rAF(function () {
           tC(e, sticky);
+          tC(e.parentNode, sticky);
           if (pv === 'fixed') stl.position = '';
         });
       } else if (isStuck) {
         it.state = 'stuck';
         rAF(function () {
           tC(e, sticky, stuck);
+          tC(e.parentNode, sticky, stuck);
           if (pv !== 'fixed' || ns) return;
           stl.top = '';
           stl.bottom = '0';
@@ -375,10 +378,12 @@
       if (isNotStickyChange) {
         rAF(function () {
           tC(e, stickyChange);
+          tC(e.parentNode, stickyChange);
         });
       } else if (isStickyChange) {
         rAF(function () {
           tC(e, stub, stickyChange);
+          tC(e.parentNode, stub, stickyChange);
         });
       }
 
@@ -409,6 +414,8 @@
       tC(e, p.stickyClass);
       tC(e, p.stuckClass);
       tC(e.parentNode, p.parentClass);
+      tC(e.parentNode, p.stickyClass);
+      tC(e.parentNode, p.stuckClass);
     };
     /*
       cleanup 🛁

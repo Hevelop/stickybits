@@ -309,6 +309,7 @@ class Stickybits {
       it.state = 'sticky'
       rAF(() => {
         tC(e, stuck, sticky)
+        tC(e.parentNode, stuck, sticky)
         stl.position = pv
         if (ns) return
         stl.bottom = ''
@@ -318,12 +319,14 @@ class Stickybits {
       it.state = 'default'
       rAF(() => {
         tC(e, sticky)
+        tC(e.parentNode, sticky)
         if (pv === 'fixed') stl.position = ''
       })
     } else if (isStuck) {
       it.state = 'stuck'
       rAF(() => {
         tC(e, sticky, stuck)
+        tC(e.parentNode, sticky, stuck)
         if (pv !== 'fixed' || ns) return
         stl.top = ''
         stl.bottom = '0'
@@ -335,9 +338,15 @@ class Stickybits {
     const isNotStickyChange = scroll < change || scroll > stop
     const stub = 'stub' // a stub css class to remove
     if (isNotStickyChange) {
-      rAF(() => { tC(e, stickyChange) })
+      rAF(() => {
+        tC(e, stickyChange)
+        tC(e.parentNode, stickyChange)
+      });
     } else if (isStickyChange) {
-      rAF(() => { tC(e, stub, stickyChange) })
+      rAF(() => {
+        tC(e, stub, stickyChange)
+        tC(e.parentNode, stub, stickyChange)
+      });
     }
     return it
   }
@@ -364,6 +373,8 @@ class Stickybits {
     tC(e, p.stickyClass)
     tC(e, p.stuckClass)
     tC(e.parentNode, p.parentClass)
+    tC(e.parentNode, p.stickyClass)
+    tC(e.parentNode, p.stuckClass)
   }
 
   /*
