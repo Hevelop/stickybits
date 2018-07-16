@@ -304,6 +304,8 @@ class Stickybits {
     const notSticky = scroll > start && scroll < stop && (state === 'default' || state === 'stuck')
     const isSticky = scroll <= start && state === 'sticky'
     const isStuck = scroll >= stop && state === 'sticky'
+    const direction = (!this.prevScroll || this.prevScroll < scroll) ? 1 : -1;
+    this.prevScroll = scroll;
     /*
       Unnamed arrow functions within this block
       ---
@@ -333,12 +335,16 @@ class Stickybits {
       rAF(() => {
         tC(e, sticky, stuck)
         tC(e.parentNode, sticky, stuck)
-        if (pv !== 'fixed' || ns) return
+        if (pv != 'fixed' || ns) return
         stl.top = ''
         stl.bottom = '0'
         stl.position = 'absolute'
       })
     }
+
+    console.log(direction);
+
+    tC(e.parentNode, direction != 1 ? 'direction-down' : 'direction-up', direction == 1 ? 'direction-down' : 'direction-up');
 
     const isStickyChange = scroll >= change && scroll <= stop
     const isNotStickyChange = scroll < change || scroll > stop

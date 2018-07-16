@@ -337,6 +337,8 @@ function () {
     var notSticky = scroll > start && scroll < stop && (state === 'default' || state === 'stuck');
     var isSticky = scroll <= start && state === 'sticky';
     var isStuck = scroll >= stop && state === 'sticky';
+    var direction = !this.prevScroll || this.prevScroll < scroll ? 1 : -1;
+    this.prevScroll = scroll;
     /*
       Unnamed arrow functions within this block
       ---
@@ -367,13 +369,15 @@ function () {
       rAF(function () {
         tC(e, sticky, stuck);
         tC(e.parentNode, sticky, stuck);
-        if (pv !== 'fixed' || ns) return;
+        if (pv != 'fixed' || ns) return;
         stl.top = '';
         stl.bottom = '0';
         stl.position = 'absolute';
       });
     }
 
+    console.log(direction);
+    tC(e.parentNode, direction != 1 ? 'direction-down' : 'direction-up', direction == 1 ? 'direction-down' : 'direction-up');
     var isStickyChange = scroll >= change && scroll <= stop;
     var isNotStickyChange = scroll < change || scroll > stop;
     var stub = 'stub'; // a stub css class to remove
