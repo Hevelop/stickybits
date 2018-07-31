@@ -376,7 +376,6 @@ function () {
       });
     }
 
-    console.log(direction);
     tC(e.parentNode, direction != 1 ? 'direction-down' : 'direction-up', direction == 1 ? 'direction-down' : 'direction-up');
     var isStickyChange = scroll >= change && scroll <= stop;
     var isNotStickyChange = scroll < change || scroll > stop;

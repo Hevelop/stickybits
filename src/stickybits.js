@@ -342,8 +342,6 @@ class Stickybits {
       })
     }
 
-    console.log(direction);
-
     tC(e.parentNode, direction != 1 ? 'direction-down' : 'direction-up', direction == 1 ? 'direction-down' : 'direction-up');
 
     const isStickyChange = scroll >= change && scroll <= stop
